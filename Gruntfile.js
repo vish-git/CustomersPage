@@ -20,6 +20,11 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+  var endpoints = {
+        '/user/': 'json-files/user.json',
+        '/product/': 'json-files/product.json',
+		'/customers/':'data/cutomers.json'
+    };
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -58,7 +63,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
         ]
       }
     },
@@ -75,7 +80,30 @@ module.exports = function (grunt) {
         options: {
           open: true,
           middleware: function (connect) {
+			  
             return [
+				
+				function(req, res, next) {
+					
+				var match = false;
+				var fileToRead = '';
+
+				Object.keys(endpoints).forEach(function(url) {
+				if (req.url.indexOf(url) === 0) {
+					match = true;
+					fileToRead = endpoints[url];
+				}
+			});
+
+        //no match with the url, move along
+			if (match === false) {
+				return next();
+			}
+
+			res.end(grunt.file.read(fileToRead));
+			},
+				
+				
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
