@@ -1,0 +1,26 @@
+<div ng-repeat="name in names">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="panel panel-primary" >
+                <div class="panel-heading">{{name.Name}}<button type="button" class="close">x</button> </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img ng-src="{{name.image}}" width="70" height="70">
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{name.Location}}</p>
+                            <p>{{name.orders}} Orders</p>
+                            <a href="">Edit</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

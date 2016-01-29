@@ -9,6 +9,21 @@ body {
   padding: 0;
 }
 
+
+.nav-pills > li > a{
+    text-decoration: none;
+    color: #000 !important;
+
+}
+.nav-pills > li > a > span{
+    padding-right: 5px;
+
+}
+.close{
+    color: white;
+}
+
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
