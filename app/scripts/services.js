@@ -8,6 +8,7 @@ customerService.service('PaginationService',function(){
     this.itemsCount = 0;
     this.totalPages =0;
     this.pageStart=0;
+    this.visibleCustomers = 0 ;
 
 
     this.isEmpty = function(){
@@ -15,11 +16,23 @@ customerService.service('PaginationService',function(){
     };
 
     this.noOfCustomers = function(){
+        //last page
         if(this.isLastPage()){
-            console.log('currentpage' + this.currentPage);
-            return ((this.currentPage*this.maxItemsPerPage)+this.itemsCount%this.maxItemsPerPage);
+            if(this.itemsCount%this.maxItemsPerPage===0){
+                this.visibleCustomers = ((this.currentPage+1)*this.maxItemsPerPage)+this.itemsCount%this.maxItemsPerPage;
+                return this.visibleCustomers;
+            }
+
+            else
+            {
+                this.visibleCustomers = (this.currentPage * this.maxItemsPerPage) + this.itemsCount % this.maxItemsPerPage;
+                return this.visibleCustomers;
+            }
         }
-        return (this.currentPage+1)*this.maxItemsPerPage;
+        console.log('currentpage' + this.currentPage);
+        console.log('totalPages' + this.totalPages);
+        this.visibleCustomers =(this.currentPage+1)*this.maxItemsPerPage;
+        return this.visibleCustomers;
 
     };
 

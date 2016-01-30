@@ -42,10 +42,11 @@ customerPage.controller('cardVieController',function($scope,$http,PaginationServ
         console.log('inside after delete');
         $scope.names.splice( $scope.names.indexOf(index),1);
         if($scope.names.length%12===0) {
-            if(!PaginationService.isFirstPage()) {
+            if(PaginationService.isLastPage()) {
                 $scope.pageParameters.currentPage--;
             }
             $scope.pageParameters.totalPages--;
+
         }
 
 

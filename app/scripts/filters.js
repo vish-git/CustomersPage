@@ -15,6 +15,8 @@ customerPageFilterApp.filter('paginator', function(PaginationService)
         }
         PaginationService.itemsCount=input.length;
         PaginationService.totalPages = Math.ceil(input.length/12);
+        PaginationService.visibleCustomers = PaginationService.noOfCustomers();
+
         console.log(start);
         console.log(input);
         var sliced = input.slice(start);
