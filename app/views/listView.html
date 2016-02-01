@@ -1,26 +1,77 @@
-<div ng-repeat="name in names">
-    <div class="row">
 
-        <div class="col-md-3">
-            <div class="panel panel-primary" >
-                <div class="panel-heading">{{name.Name}}<button type="button" class="close">x</button> </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img ng-src="{{name.image}}" width="70" height="70">
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{name.Location}}</p>
-                            <p>{{name.orders}} Orders</p>
-                            <a href="">Edit</a>
-                        </div>
+<div ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage * pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage" ">
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="list-group" >
+
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img ng-src="{{name.image}}" width="100" height="100">
+                    </div>
+                    <div class="col-md-5">
+                        <p>{{name.Name}}</p>
+                        <p>{{name.Location}}</p>
 
                     </div>
+                    <div class="col-md-6 ">
+
+                        <div class="row">
+                            <div  class="col-md-3 col-md-offset-9">
+                                <p >{{name.orders}} Orders</p>
+
+
+                                <div class="row ">
+
+                                    <div class="pull-right btn-group">
+                                        <button type="button" class="btn btn-primary" ><a href="#/editCustomer" ng-click="doEdit($index)">Edit</a></button>
+
+                                        <button type="button" class="btn btn-primary" ng-click="delete(name)">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
             </div>
-        </div>
 
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <nav>
+            <ul class="pagination">
+                <li ng-class="pageParameters.isFirstPage() && 'disabled'"><a href="" ng-click="pageParameters.firstPage()" >First</a></li>
+                <li ng-class="pageParameters.isFirstPage() && 'disabled'">
+                    <a href="" aria-label="Previous" ng-class="pageParameters.isEmpty() && 'disabled'" ng-click="pageParameters.perviousPage()">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+
+                <li ng-repeat="i in [] | linkGenerator:pageParameters.pageStart:pageParameters.totalPages" ng-class="pageParameters.currentPage==i && 'active'" ><a href="" ng-click="pageParameters.currentPage=i" >{{i+1}}</a></li>
+
+                <li ng-class="pageParameters.isLastPage() && 'disabled'">
+                    <a href="" ng-click="pageParameters.nextPage()" ng-class="pageParameters.isEmpty() && 'disabled'"aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+                <li ng-class="pageParameters.isLastPage() && 'disabled'" ng-click="pageParameters.lastPage()"><a  ng-class="pageParameters.isLastPage() && 'icon-white'">last</a></li>
+            </ul>
+        </nav>
 
     </div>
 </div>
+<div class="row">
+    Showings {{pageParameters.noOfCustomers()}} of {{pageParameters.itemsCount}} customers
+
+</div>
+
+

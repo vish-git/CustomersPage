@@ -1,4 +1,5 @@
 <div ng-class="row">
+
     <div class="col-md-12">
 
 <div   ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage * pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage" >
@@ -16,7 +17,7 @@
               <div class="col-md-8">
             <p>{{name.Location}}</p>
             <p>{{name.orders}} Orders</p>
-            <a href="">Edit</a>
+            <a href="#/editCustomer" ng-click="doEdit($index)">Edit</a>
               </div>
 
         </div>

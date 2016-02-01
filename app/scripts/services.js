@@ -29,15 +29,12 @@ customerService.service('PaginationService',function(){
                 return this.visibleCustomers;
             }
         }
-        console.log('currentpage' + this.currentPage);
-        console.log('totalPages' + this.totalPages);
         this.visibleCustomers =(this.currentPage+1)*this.maxItemsPerPage;
         return this.visibleCustomers;
 
     };
 
     this.nextPage = function () {
-        console.log('currentpage' + this.currentPage);
         if (this.currentPage === this.totalPages-1) {
             return;
         }
@@ -94,4 +91,36 @@ customerService.service('PaginationService',function(){
     //handle active page
 
 });
+
+customerService.service('MasterData',function(){
+    var self = this;
+    self.cardLayoutData = {};
+    self.operation = '';
+   });
+
+customerService.service('GetJSONDataService',function($http){
+    var self=this;
+    self.customer = [];
+
+    self.getCustomerRecords = function(callback){
+       $http.get('/customers/')
+            .success(callback);
+    };
+});
+
+customerService.service('GetEditCustomerDataService',function(){
+    var self=this;
+    self.EditCustomerData = {};
+    self.EditCustomerIndex = 0;
+    self.Page=0;
+
+    self.testData = function(){
+      console.log(self.EditCustomerData);
+        console.log(self.EditCustomerIndex);
+
+    };
+
+
+});
+
 
