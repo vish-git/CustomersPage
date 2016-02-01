@@ -21,9 +21,7 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
   var endpoints = {
-        '/user/': 'json-files/user.json',
-        '/product/': 'json-files/product.json',
-		'/customers/':'data/cutomers.json'
+        '/customers/':'data/cutomers.json'
     };
 
   // Define the configuration for all the tasks
