@@ -94,7 +94,7 @@ customerService.service('PaginationService',function(){
 
 customerService.service('MasterData',function(){
     var self = this;
-    self.cardLayoutData = {};
+    self.cardLayoutData = [];
     self.operation = '';
    });
 

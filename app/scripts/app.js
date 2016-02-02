@@ -52,11 +52,18 @@ customerPage.controller('cardVieController',function($scope,$http,PaginationServ
    GetJSONDataService.getCustomerRecords(function(data){
         $scope.names=data.records;
 
-       if(Object.keys(MasterData.cardLayoutData).length !== 0 && MasterData.operation ==='ADD' ){
-           $scope.names.splice(0,0,MasterData.cardLayoutData);
-       }
+       if(MasterData.cardLayoutData.length !== 0 && MasterData.operation ==='ADD' ){
+				MasterData.cardLayoutData.forEach(function(element){
+                $scope.names.splice(0,0,element);
+
+            });
+            //move to first page
+             $scope.pageParameters.currentPage = 0;
+		}
        if(Object.keys(MasterData.cardLayoutData).length !== 0 && MasterData.operation ==='EDIT' ){
-           $scope.names[GetEditCustomerDataService.EditCustomerIndex]=MasterData.cardLayoutData;
+        console.log(MasterData.cardLayoutData);
+           $scope.names[GetEditCustomerDataService.EditCustomerIndex]=MasterData.cardLayoutData[0];
+           console.log($scope.names);
        }
     });
 
@@ -89,7 +96,7 @@ customerPage.controller('cardVieController',function($scope,$http,PaginationServ
 customerPage.controller('addCustomController',function($scope,MasterData,$location) {
 
     $scope.addCustomer = function(){
-        MasterData.cardLayoutData= $scope.customer;
+        MasterData.cardLayoutData.push($scope.customer);
         MasterData.operation='ADD';
         $location.url('/');
         };
@@ -112,7 +119,10 @@ customerPage.controller('editCustomController',function($scope,GetEditCustomerDa
     $scope.editIndex = GetEditCustomerDataService.EditCustomerIndex;
 
     $scope.SaveEditedCustomer =function(){
-        MasterData.cardLayoutData= $scope.editCustomer;
+        //clear array
+        MasterData.cardLayoutData.length=0;
+        MasterData.cardLayoutData.push($scope.editCustomer);
+        console.log(MasterData.cardLayoutData);
         MasterData.operation='EDIT';
         $location.url('/');
     };
