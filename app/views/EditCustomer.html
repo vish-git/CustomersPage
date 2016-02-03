@@ -2,19 +2,19 @@
 <div class="page-header">
     <h1>Edit Customer</h1>
 </div>
-<form class="form-horizontal">
+<form class="form-horizontal" name="customerEditForm">
     <div class="form-group">
         <span class="form-group-addon" id="basic-addon1">Name</span>
-        <input type="text" class="form-control" placeholder="Username" ng-model="editCustomer.Name">
+        <input type="text" class="form-control" placeholder="Username" ng-model="editCustomer.Name" required>
     </div>
 
     <div class="form-group">
         <span class="form-group-addon" id="basic-addon2">Location</span>
-        <input type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon1" ng-model="editCustomer.Location">
+        <input type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon1" ng-model="editCustomer.Location" required>
     </div>
     <div class="form-group">
         <span class="form-group-addon" id="basic-addon3">Orders</span>
-        <input type="text" class="form-control" aria-describedby="basic-addon1" ng-init="customer.orders=0" ng-model="editCustomer.orders">
+        <input type="text" class="form-control" aria-describedby="basic-addon1" ng-init="customer.orders=0" ng-model="editCustomer.orders" required>
     </div>
     <div class="form-group">
         <div class="input-group-btn">
@@ -25,7 +25,7 @@
             </ul>
 
         </div><!-- /btn-group -->
-        <input type="text" class="form-control" ng-model="editCustomer.image" readonly>
+        <input type="text" class="form-control" ng-model="editCustomer.image" readonly required>
     </div><!-- /input-group -->
     <!-- /.col-lg-6 -->
 
@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default" ng-click="SaveEditedCustomer()">Save</button>
+                    <button type="button" class="btn btn-default" ng-click="SaveEditedCustomer()" ng-disabled="customerEditForm.$invalid">Save</button>
                     <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
                 </div>
             </div>

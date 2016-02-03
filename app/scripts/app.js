@@ -60,9 +60,15 @@ customerPage.controller('cardVieController',function($scope,$http,PaginationServ
             //move to first page
              $scope.pageParameters.currentPage = 0;
 		}
-       if(Object.keys(MasterData.cardLayoutData).length !== 0 && MasterData.operation ==='EDIT' ){
+       if(MasterData.cardLayoutData.length !== 0 && MasterData.operation ==='EDIT' ){
         console.log(MasterData.cardLayoutData);
-           $scope.names[GetEditCustomerDataService.EditCustomerIndex]=MasterData.cardLayoutData[0];
+           MasterData.cardLayoutData.forEach(function(element){
+               console.log("inside edit bug");
+               console.log(element);
+               console.log(element);
+               $scope.names[element[0]]=element[1];
+           });
+
            console.log($scope.names);
        }
     });
@@ -119,9 +125,10 @@ customerPage.controller('editCustomController',function($scope,GetEditCustomerDa
     $scope.editIndex = GetEditCustomerDataService.EditCustomerIndex;
 
     $scope.SaveEditedCustomer =function(){
-        //clear array
-        MasterData.cardLayoutData.length=0;
-        MasterData.cardLayoutData.push($scope.editCustomer);
+        var editedcustomerData = [$scope.editIndex,$scope.editCustomer];
+        console.log("editcustomerdata:");
+        console.log(editedcustomerData);
+        MasterData.cardLayoutData.push(editedcustomerData);
         console.log(MasterData.cardLayoutData);
         MasterData.operation='EDIT';
         $location.url('/');

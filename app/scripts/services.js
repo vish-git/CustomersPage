@@ -95,6 +95,7 @@ customerService.service('PaginationService',function(){
 customerService.service('MasterData',function(){
     var self = this;
     self.cardLayoutData = [];
+    self.cardLayouIndexForEdit =[];
     self.operation = '';
    });
 
