@@ -45,9 +45,19 @@ customerPage.config(['$routeProvider',
             });
     }]);
 
-customerPage.controller('cardVieController',function($scope,$http,PaginationService,GetJSONDataService,MasterData,GetEditCustomerDataService){
+customerPage.controller('cardVieController',function($scope,$rootScope,$http,PaginationService,GetJSONDataService,MasterData,GetEditCustomerDataService){
     $scope.names=[];
-
+    $scope.pageParameters = PaginationService;
+   /* if(angular.element('#filter').scope()!== 'undefined' ){
+        if(angular.element('#filter').val()){
+            console.log(angular.element('#filter').scope());
+            console.log('****************************************');
+            if($scope.pageParameters.currentPage > $scope.pageParameters.totalPages ) {
+                var returnPreviousIndexcount = $scope.pageParameters.currentPage - $scope.pageParameters.totalPages;
+                console.log('the index to adjust is:' + returnPreviousIndexcount);
+            }
+        }
+    }*/
 
    GetJSONDataService.getCustomerRecords(function(data){
         $scope.names=data.records;
@@ -63,18 +73,31 @@ customerPage.controller('cardVieController',function($scope,$http,PaginationServ
        if(MasterData.cardLayoutData.length !== 0 && MasterData.operation ==='EDIT' ){
         console.log(MasterData.cardLayoutData);
            MasterData.cardLayoutData.forEach(function(element){
-               console.log("inside edit bug");
-               console.log(element);
-               console.log(element);
-               $scope.names[element[0]]=element[1];
+                 $scope.names[element[0]]=element[1];
            });
 
-           console.log($scope.names);
+
        }
     });
 
+    $rootScope.filterChanged = function(){
 
-    $scope.pageParameters = PaginationService;
+        console.log('changed');
+        if($rootScope.filterName !== 'undefined') {
+            console.log('*#########################################');
+            if(!$rootScope.filterName.Name){
+                var adjustmentIndex =  PaginationService.adjustmentIndex;
+                console.log('adjustmentIndex' + adjustmentIndex);
+                console.log('The current page is:' + PaginationService.currentPage);
+                for(var i=0;i<adjustmentIndex;i++){
+                    PaginationService.currentPage++;
+                }
+                PaginationService.adjustmentIndex = 0;
+            }
+
+        }
+    };
+
     $scope.delete = function(index){
         $scope.names.splice( $scope.names.indexOf(index),1);
         if($scope.names.length%12===0) {
@@ -92,7 +115,7 @@ customerPage.controller('cardVieController',function($scope,$http,PaginationServ
         GetEditCustomerDataService.Page= $scope.pageParameters.currentPage;
         GetEditCustomerDataService.EditCustomerIndex=index + (12*GetEditCustomerDataService.Page);
         GetEditCustomerDataService.EditCustomerData = $scope.names[GetEditCustomerDataService.EditCustomerIndex];
-        console.log(index);
+
         console.log( GetEditCustomerDataService.EditCustomerIndex);
 
         GetEditCustomerDataService.testData();
@@ -126,7 +149,7 @@ customerPage.controller('editCustomController',function($scope,GetEditCustomerDa
 
     $scope.SaveEditedCustomer =function(){
         var editedcustomerData = [$scope.editIndex,$scope.editCustomer];
-        console.log("editcustomerdata:");
+        console.log('editcustomerdata:');
         console.log(editedcustomerData);
         MasterData.cardLayoutData.push(editedcustomerData);
         console.log(MasterData.cardLayoutData);

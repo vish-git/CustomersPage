@@ -2,7 +2,7 @@
 
     <div class="col-md-12">
 
-<div   ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage * pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage" >
+<div   ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage: pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage" >
 
 
 
@@ -28,9 +28,12 @@
 
 </div>
     </div>
+    <div class="col-md-12" ng-hide="pageParameters.itemsCount">
+        <h1 align="center">NO CUSTOMERS TO DISPLAY &#9785;</h1>
+    </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" ng-show="pageParameters.itemsCount">
 
         <nav>
             <ul class="pagination">

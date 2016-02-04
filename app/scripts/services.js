@@ -9,6 +9,7 @@ customerService.service('PaginationService',function(){
     this.totalPages =0;
     this.pageStart=0;
     this.visibleCustomers = 0 ;
+    this.adjustmentIndex = 0;
 
 
     this.isEmpty = function(){
@@ -33,6 +34,10 @@ customerService.service('PaginationService',function(){
         return this.visibleCustomers;
 
     };
+
+
+
+
 
     this.nextPage = function () {
         if (this.currentPage === this.totalPages-1) {

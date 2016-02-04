@@ -30,9 +30,9 @@
        <div class="row">
            <div class="col-md-8">
          <ul class="nav nav-pills">
-        <li role="presentation"><a href="#/"><span class="glyphicon glyphicon-th-large"></span>Card View</a></li>
-        <li role="presentation"><a href="#/listView"><span class="glyphicon glyphicon-align-justify"></span>List View</a></li>
-        <li role="presentation"><a href="#/addCustomer"><span class="glyphicon glyphicon-plus"></span>Add Customer</a></li>
+        <li role="presentation"><a href="#/"><span class="glyphicon glyphicon-th-large"></span><span class="hidden-xs">Card View</span></a></li>
+        <li role="presentation"><a href="#/listView"><span class="glyphicon glyphicon-align-justify"></span><span class="hidden-xs">List View</span></a></li>
+        <li role="presentation"><a href="#/addCustomer"><span class="glyphicon glyphicon-plus"></span><span class="hidden-xs">Add Customer</span></a></li>
 
              </ul>
         </div>
@@ -41,7 +41,7 @@
     <div class="col-md-4">
         <div class="pull-right">
         Filter
-        <input type="text" id="filter" ng-model="filterName.Name">
+        <input type="text" id="filter" ng-model="filterName.Name" ng-change="filterChanged()">
         </div>
     </div>
            </div>
