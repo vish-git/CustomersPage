@@ -1,5 +1,5 @@
 
-<div ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage * pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage" ">
+<div ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage : pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage">
 <div class="row">
 
     <div class="col-md-12">
