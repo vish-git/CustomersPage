@@ -1,3 +1,8 @@
+<div class="col-md-12" ng-hide="pageParameters.itemsCount">
+    <h1 align="center">NO CUSTOMERS TO DISPLAY &#9785;</h1>
+
+</div>
+
 
 <div ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage : pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage">
 <div class="row">
@@ -8,7 +13,7 @@
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-md-1">
-                        <img ng-src="{{name.image}}" width="100" height="100">
+                        <img ng-src="{{name.image}}" width="75" height="75">
                     </div>
                     <div class="col-md-5">
                         <p>{{name.Name}}</p>
@@ -24,8 +29,8 @@
 
                                 <div class="row ">
 
-                                    <div class="pull-right btn-group">
-                                        <button type="button" class="btn btn-primary" ><a href="#/editCustomer" ng-click="doEdit($index)">Edit</a></button>
+                                    <div class="pull-right btn-group col-md-12">
+                                        <a href="#/editCustomer" class="btn btn-primary" ng-click="doEdit($index)">Edit</a>
 
                                         <button type="button" class="btn btn-primary" ng-click="delete(name)">Delete</button>
                                     </div>
@@ -45,7 +50,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" ng-show="pageParameters.itemsCount">
 
         <nav>
             <ul class="pagination">
@@ -70,7 +75,7 @@
     </div>
 </div>
 <div class="row">
-    Showings {{pageParameters.noOfCustomers()}} of {{pageParameters.itemsCount}} customers
+    Showing {{pageParameters.visibleCustomers}} of {{pageParameters.itemsCount}} customers
 
 </div>
 

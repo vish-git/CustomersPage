@@ -102,6 +102,7 @@ customerService.service('MasterData',function(){
     self.cardLayoutData = [];
     self.cardLayouIndexForEdit =[];
     self.operation = '';
+    self.deletedItems = [];
    });
 
 customerService.service('GetJSONDataService',function($http){

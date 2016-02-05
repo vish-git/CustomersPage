@@ -48,6 +48,7 @@ customerPage.config(['$routeProvider',
 customerPage.controller('cardVieController',function($scope,$rootScope,$http,PaginationService,GetJSONDataService,MasterData,GetEditCustomerDataService){
     $scope.names=[];
     $scope.pageParameters = PaginationService;
+    $rootScope.show = true;
    /* if(angular.element('#filter').scope()!== 'undefined' ){
         if(angular.element('#filter').val()){
             console.log(angular.element('#filter').scope());
@@ -122,8 +123,8 @@ customerPage.controller('cardVieController',function($scope,$rootScope,$http,Pag
     };
 });
 
-customerPage.controller('addCustomController',function($scope,MasterData,$location) {
-
+customerPage.controller('addCustomController',function($scope,$rootScope,MasterData,$location) {
+    $rootScope.show = false;
     $scope.addCustomer = function(){
         MasterData.cardLayoutData.push($scope.customer);
         MasterData.operation='ADD';
@@ -142,8 +143,8 @@ customerPage.controller('addCustomController',function($scope,MasterData,$locati
 
 });*/
 
-customerPage.controller('editCustomController',function($scope,GetEditCustomerDataService,MasterData,$location) {
-
+customerPage.controller('editCustomController',function($scope,$rootScope,GetEditCustomerDataService,MasterData,$location) {
+    $rootScope.show = false;
     $scope.editCustomer = GetEditCustomerDataService.EditCustomerData;
     $scope.editIndex = GetEditCustomerDataService.EditCustomerIndex;
 
