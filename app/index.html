@@ -13,6 +13,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/custom.css">
     <!-- endbuild -->
   </head>
   <body ng-app="customerpageApp">
@@ -21,36 +22,39 @@
 
     <!-- Add your site or application content here -->
    <div class="container-fluid">
-
        <div class="row">
-            <h1>Customers</h1>
-       </div>
-
-
-       <div class="row">
-           <div class="col-md-8">
-         <ul class="nav nav-pills">
-        <li role="presentation"><a href="#/"><span class="glyphicon glyphicon-th-large"></span><span class="hidden-xs">Card View</span></a></li>
-        <li role="presentation"><a href="#/listView/"><span class="glyphicon glyphicon-align-justify"></span><span class="hidden-xs">List View</span></a></li>
-        <li role="presentation"><a href="#/addCustomer/"><span class="glyphicon glyphicon-plus"></span><span class="hidden-xs">Add Customer</span></a></li>
-
-             </ul>
-        </div>
-
-
-    <div class="col-md-4" ng-show="show">
-        <div class="pull-right">
-        Filter
-        <input type="text" id="filter" ng-model="filterName.Name" ng-change="filterChanged()" >
-        </div>
-    </div>
+           <div class="col-sm-12 col-md-12 custom-header">
+               <h1>Customers</h1>
            </div>
-
-    <div class="row">
-        <div ng-view>
-
-	    </div>
-    </div>
+       </div>
+       <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <ul class="nav nav-pills custom-nav">
+                    <li role="presentation"><a href="#/"><span class="glyphicon glyphicon-th-large"></span><span class="hidden-xs">Card View</span></a></li>
+                    <li role="presentation"><a href="#/listView/"><span class="glyphicon glyphicon-align-justify"></span><span class="hidden-xs">List View</span></a></li>
+                    <li role="presentation"><a href="#/addCustomer/"><span class="glyphicon glyphicon-plus"></span><span class="hidden-xs">Add Customer</span></a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12" ng-show="show">
+                <div class="custom-filter">
+                    <div>
+                        <label class="hidden-xs">Filter</label>
+                    </div>
+                    <div>
+                        <input type="text" id="filter" ng-model="filterName.Name" ng-change="filterChanged()" >
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-search visible-xs"></span>
+                    </div>
+                </div>
+            </div>
+       </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div ng-view>
+            </div>
+            </div>
+        </div>
   </div>
 	
 

@@ -1,35 +1,36 @@
 <div class="container">
-<div class="page-header">
-    <h1>Edit Customer</h1>
+<div class="custom-add-customer">
+    <h2>Edit Customer</h2>
 </div>
-<form class="form-horizontal" name="customerEditForm">
-    <div class="form-group">
-        <span class="form-group-addon" id="basic-addon1">Name</span>
-        <input type="text" class="form-control" placeholder="Username" ng-model="editCustomer.Name" required>
-    </div>
+    <div class="add-customer-wrapper">
+        <form class="form-horizontal" name="customerEditForm">
+            <div class="form-group">
+                <span class="form-group-addon" id="basic-addon1">Name</span>
+                <input type="text" class="form-control" placeholder="Username" ng-model="editCustomer.Name" required>
+            </div>
 
-    <div class="form-group">
-        <span class="form-group-addon" id="basic-addon2">Location</span>
-        <input type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon1" ng-model="editCustomer.Location" required>
-    </div>
-    <div class="form-group">
-        <span class="form-group-addon" id="basic-addon3">Orders</span>
-        <input type="text" class="form-control" aria-describedby="basic-addon1" ng-init="customer.orders=0" ng-model="editCustomer.orders" required>
-    </div>
-    <div class="form-group">
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown">Select Picture <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a ng-click="editCustomer.image='/images/female_user_icon.png'">/images/female_user_icon.png</a></li>
-                <li><a ng-click="editCustomer.image='/images/male_user_icon.png'">/images/male_user_icon.png</a></li>
-            </ul>
+            <div class="form-group">
+                <span class="form-group-addon" id="basic-addon2">Location</span>
+                <input type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon1" ng-model="editCustomer.Location" required>
+            </div>
+            <div class="form-group">
+                <span class="form-group-addon" id="basic-addon3">Orders</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" ng-init="customer.orders=0" ng-model="editCustomer.orders" required>
+            </div>
+            <div class="form-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown">Select Picture <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="editCustomer.image='/images/female_user_icon.png'">/images/female_user_icon.png</a></li>
+                        <li><a ng-click="editCustomer.image='/images/male_user_icon.png'">/images/male_user_icon.png</a></li>
+                    </ul>
 
-        </div><!-- /btn-group -->
-        <input type="text" class="form-control" ng-model="editCustomer.image" readonly required>
-    </div><!-- /input-group -->
-    <!-- /.col-lg-6 -->
+                </div><!-- /btn-group -->
+                <input type="text" class="form-control" ng-model="editCustomer.image" readonly required>
+            </div><!-- /input-group -->
+            <!-- /.col-lg-6 -->
 
-    <!-- /.row -->
+            <!-- /.row -->
 
             <div class="form-group">
                 <div class="btn-group" role="group" aria-label="...">
@@ -38,6 +39,9 @@
                 </div>
             </div>
         </form>
+
+
+    </div>
 
 
   </div>

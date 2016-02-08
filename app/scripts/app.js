@@ -49,36 +49,26 @@ customerPage.controller('cardVieController',function($scope,$rootScope,$http,Pag
     $scope.names=[];
     $scope.pageParameters = PaginationService;
     $rootScope.show = true;
-   /* if(angular.element('#filter').scope()!== 'undefined' ){
-        if(angular.element('#filter').val()){
-            console.log(angular.element('#filter').scope());
-            console.log('****************************************');
-            if($scope.pageParameters.currentPage > $scope.pageParameters.totalPages ) {
-                var returnPreviousIndexcount = $scope.pageParameters.currentPage - $scope.pageParameters.totalPages;
-                console.log('the index to adjust is:' + returnPreviousIndexcount);
-            }
-        }
-    }*/
+
+    $scope.$on('$locationChangeStart',function(e,next,previous){
+        MasterData.previousUrl = previous.split('#')[1];
+
+    });
+
 
    GetJSONDataService.getCustomerRecords(function(data){
-        $scope.names=data.records;
 
-       if(MasterData.cardLayoutData.length !== 0 && MasterData.operation ==='ADD' ){
-				MasterData.cardLayoutData.forEach(function(element){
-                $scope.names.splice(0,0,element);
-
-            });
-            //move to first page
-             $scope.pageParameters.currentPage = 0;
-		}
-       if(MasterData.cardLayoutData.length !== 0 && MasterData.operation ==='EDIT' ){
-        console.log(MasterData.cardLayoutData);
-           MasterData.cardLayoutData.forEach(function(element){
-                 $scope.names[element[0]]=element[1];
-           });
-
-
+       if(!MasterData.operationPerformed){
+           MasterData.layoutData = data.records;
        }
+
+       if(MasterData.operation ==='ADD' ){
+           $scope.pageParameters.currentPage = 0;
+           MasterData.operation='';
+       }
+
+       $scope.names = MasterData.layoutData;
+
     });
 
     $rootScope.filterChanged = function(){
@@ -100,25 +90,21 @@ customerPage.controller('cardVieController',function($scope,$rootScope,$http,Pag
     };
 
     $scope.delete = function(index){
-        $scope.names.splice( $scope.names.indexOf(index),1);
+        MasterData.layoutData.splice(index,1);
         if($scope.names.length%12===0) {
-            if(PaginationService.isLastPage()) {
+            if (PaginationService.isLastPage()) {
                 $scope.pageParameters.currentPage--;
             }
             $scope.pageParameters.totalPages--;
-
         }
+        MasterData.operationPerformed =true;
+      };
 
-
-    };
     $scope.doEdit =function(index){
         console.log(index);
         GetEditCustomerDataService.Page= $scope.pageParameters.currentPage;
         GetEditCustomerDataService.EditCustomerIndex=index + (12*GetEditCustomerDataService.Page);
         GetEditCustomerDataService.EditCustomerData = $scope.names[GetEditCustomerDataService.EditCustomerIndex];
-
-        console.log( GetEditCustomerDataService.EditCustomerIndex);
-
         GetEditCustomerDataService.testData();
     };
 });
@@ -126,12 +112,13 @@ customerPage.controller('cardVieController',function($scope,$rootScope,$http,Pag
 customerPage.controller('addCustomController',function($scope,$rootScope,MasterData,$location) {
     $rootScope.show = false;
     $scope.addCustomer = function(){
-        MasterData.cardLayoutData.push($scope.customer);
+        MasterData.layoutData.splice(0,0,$scope.customer);
         MasterData.operation='ADD';
-        $location.url('/');
+        MasterData.operationPerformed =true;
+        $location.path(MasterData.previousUrl);
         };
     $scope.cancel = function(){
-        $location.url('/');
+        $location.path(MasterData.previousUrl);
     };
 
 });
@@ -149,16 +136,14 @@ customerPage.controller('editCustomController',function($scope,$rootScope,GetEdi
     $scope.editIndex = GetEditCustomerDataService.EditCustomerIndex;
 
     $scope.SaveEditedCustomer =function(){
-        var editedcustomerData = [$scope.editIndex,$scope.editCustomer];
-        console.log('editcustomerdata:');
-        console.log(editedcustomerData);
-        MasterData.cardLayoutData.push(editedcustomerData);
-        console.log(MasterData.cardLayoutData);
+        MasterData.layoutData[GetEditCustomerDataService.EditCustomerIndex] = GetEditCustomerDataService.EditCustomerData;
         MasterData.operation='EDIT';
-        $location.url('/');
+        MasterData.operationPerformed =true;
+        $location.path(MasterData.previousUrl);
     };
     $scope.cancel = function(){
-        $location.url('/');
+        $location.path(MasterData.previousUrl);
+
 
     };
 

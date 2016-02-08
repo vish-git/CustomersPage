@@ -1,59 +1,95 @@
-<div class="col-md-12" ng-hide="pageParameters.itemsCount">
-    <h1 align="center">NO CUSTOMERS TO DISPLAY &#9785;</h1>
-
+<div class="col-md-12 custom-hide" ng-hide="pageParameters.itemsCount">
+    <h2 align="center">No Customers to Display &#9785;</h2>
 </div>
 
 
-<div ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage : pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage">
-<div class="row">
+<div class="custom-list-view" ng-repeat="name in names |filter:filterName:strict| paginator : pageParameters.currentPage : pageParameters.maxItemsPerPage | limitTo:pageParameters.maxItemsPerPage">
+    <div class="row">
 
-    <div class="col-md-12">
-        <div class="list-group" >
+        <div class="col-md-12 hidden-xs">
+            <div class="list-group" >
 
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-md-1">
-                        <img ng-src="{{name.image}}" width="75" height="75">
-                    </div>
-                    <div class="col-md-5">
-                        <p>{{name.Name}}</p>
-                        <p>{{name.Location}}</p>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img ng-src="{{name.image}}" width="75" height="75">
+                        </div>
+                        <div class="col-md-5">
+                            <p>{{name.Name}}</p>
+                            <p>{{name.Location}}</p>
 
-                    </div>
-                    <div class="col-md-6 ">
+                        </div>
+                        <div class="col-md-6 ">
 
-                        <div class="row">
-                            <div  class="col-md-3 col-md-offset-9">
-                                <p >{{name.orders}} Orders</p>
+                            <div class="row">
+                                <div  class="col-md-3 col-md-offset-9">
+                                    <p >{{name.orders}} Orders</p>
 
 
-                                <div class="row ">
+                                    <div class="row ">
 
-                                    <div class="pull-right btn-group col-md-12">
-                                        <a href="#/editCustomer" class="btn btn-primary" ng-click="doEdit($index)">Edit</a>
+                                        <div class="pull-right btn-group col-md-12">
+                                            <a href="#/editCustomer" class="btn btn-primary" ng-click="doEdit($index)">Edit</a>
 
-                                        <button type="button" class="btn btn-primary" ng-click="delete(name)">Delete</button>
+                                            <button type="button" class="btn btn-primary" ng-click="delete($index)">Delete</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
+        <div class="col-xs-12 visible-xs">
+            <div class="list-group" >
+
+                <div class="list-group-item">
+                    <div class="row">
+
+                 <div class="col-xs-1">
+                         <img ng-src="{{name.image}}" width="25" height="30">
+                 </div>
+
+                 <div class="col-xs-6">
+                    <div class="customer-details">
+                         <div class="row">
+                       <div class="col-xs-12">
+                         {{name.Name}}
+                       </div>
+                    <div>
+                       <div class="col-xs-12">
+                         {{name.Location}}
+                       </div>
+                    </div>
+                    </div>
+                    </div>
+                 </div>
+                  <div class="col-xs-1">
+                       {{name.orders}}
+                  </div>
+                  <div class="col-xs-1">
+                      <a href="#/editCustomer" style="cursor:pointer" class="glyphicon glyphicon-edit" ng-click="doEdit($index)"></a>
+                 </div>
+                  <span class="col-xs-1">
+                      <span style="cursor:pointer" class="glyphicon glyphicon-remove" ng-click="delete($index)"></span>
+                 </span>
+                    </div>
+            </div>
+                </div>
+        </div>
+
+
     </div>
-
-
-</div>
 </div>
 
 <div class="row">
-    <div class="col-md-12" ng-show="pageParameters.itemsCount">
+    <div class="col-md-12 col-xs-12" ng-show="pageParameters.itemsCount">
 
         <nav>
-            <ul class="pagination">
+            <ul class="pagination custom-pagination">
                 <li ng-class="pageParameters.isFirstPage() && 'disabled'"><a href="" ng-click="pageParameters.firstPage()" >First</a></li>
                 <li ng-class="pageParameters.isFirstPage() && 'disabled'">
                     <a href="" aria-label="Previous" ng-class="pageParameters.isEmpty() && 'disabled'" ng-click="pageParameters.perviousPage()">
@@ -75,8 +111,9 @@
     </div>
 </div>
 <div class="row">
-    Showing {{pageParameters.visibleCustomers}} of {{pageParameters.itemsCount}} customers
-
+    <div class="col-sm-12 col-md-12">
+        <span class="custom-pagination">Showing {{pageParameters.visibleCustomers}} of {{pageParameters.itemsCount}} customers</span>
+     </div>
 </div>
 
 

@@ -1,0 +1,84 @@
+.custom-filter div{
+    display: inline-block;
+}
+.custom-filter{
+    margin: 10px 0px 25px 0px;
+    text-align: center;
+}
+.custom-nav{
+    margin: 0px 0px 0px 60px;
+}
+.custom-header{
+    text-align: center;
+}
+.custom-filter span{
+    cursor: pointer;
+    margin: 0px 0px 0px 5px;
+}
+.custom-close{
+    cursor: pointer;
+    float: right;
+}
+.custom-pagination{
+    margin: 0px 0px 0px 30px;
+}
+.custom-hide {
+    height: 500px;
+    line-height: 400px;
+    text-align: center;
+}
+.custom-hide h2{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 400px;
+    color: darkred;
+    /*font-size:23px;*/
+}
+
+.customer-details{
+    padding : 0px 0px 0px 6px;
+}
+@media (min-width: 768px) {
+    .custom-header h1{
+        padding: 0px 0px 0px 30px;
+        text-align: left;
+    }
+    .custom-nav{
+        /*padding: 0px 0px 30px 30px;*/
+        /*margin: auto;*/
+        margin: 0px 0px 30px 30px;
+    }
+    .custom-filter{
+        margin: 0px 0px 0px 146px;
+    }
+    .custom-filter label{
+        margin: 0px 10px 0px 0px;
+    }
+    .custom-list-view{
+        margin: 0px 32px 0px 32px;
+    }
+    .custom-pagination{
+        margin: 25px 0px 30px 30px;
+    }
+    .custom-hide {
+        height: 500px;
+        line-height: 400px;
+        text-align: center;
+    }
+    .custom-hide h2{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 400px;
+        color: darkred;
+    }
+    /*Styles added for Add Customer Page starts here*/
+
+    .custom-add-customer{
+        text-align:center;
+    }
+    .add-customer-wrapper{
+        width: 293px;
+        margin: 20px 0px 0px 210px;
+    }
+    /*Styles added for Add Customer Page ends here*/
+}
