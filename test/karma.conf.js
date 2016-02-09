@@ -52,10 +52,28 @@ module.exports = function(config) {
       "PhantomJS"
     ],
 
+      reporters: ['progress', 'coverage','html'],
+      preprocessors: {
+          'app/scripts/**/*.js': ['coverage']
+      },
+      coverageReporter: {
+          type: 'html',
+          dir: 'codeCoverage'
+      },
+      htmlReporter: {
+          outputFile: 'testResults/CustomerPageApp.html',
+
+          // Optional
+          pageTitle: 'Customer Page App Unit Tests'
+
+      },
+
     // Which plugins to enable
     plugins: [
       "karma-phantomjs-launcher",
-      "karma-jasmine"
+      "karma-jasmine",
+        "karma-coverage",
+        "karma-htmlfile-reporter"
     ],
 
     // Continuous Integration mode
