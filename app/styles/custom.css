@@ -35,6 +35,17 @@
     /*font-size:23px;*/
 }
 
+.mob-edit{
+    text-decoration: none;
+    color: black;
+}
+
+.mob-edit:hover{
+    text-decoration: none;
+    color: black;
+
+}
+
 .customer-details{
     padding : 0px 0px 0px 6px;
 }
@@ -49,7 +60,7 @@
         margin: 0px 0px 30px 30px;
     }
     .custom-filter{
-        margin: 0px 0px 0px 146px;
+        margin: 0px 0px 0px 128px;
     }
     .custom-filter label{
         margin: 0px 10px 0px 0px;
