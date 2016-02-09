@@ -3,12 +3,12 @@
     describe('customerpageApp Services Test', function () {
         //mock object
         var customers = {
-            "records": [
+            'records': [
                 {
-                    "Name": "Word Bell",
-                    "Location": "Dellas,Texas",
-                    "orders": 1,
-                    "image" :"/images/User.jpg"
+                    'Name': 'Word Bell',
+                    'Location': 'Dellas,Texas',
+                    'orders': 1,
+                    'image' :'/images/User.jpg'
                 }]};
 
         //local variables
