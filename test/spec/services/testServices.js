@@ -9,6 +9,12 @@
                     'Location': 'Dellas,Texas',
                     'orders': 1,
                     'image' :'/images/User.jpg'
+                },
+                {
+                    "Name": "Candy sharon",
+                    "Location": "Dellas,Texas",
+                    "orders": 9,
+                    "image" :"/images/User.jpg"
                 }]};
 
         //local variables
@@ -17,15 +23,23 @@
         var service;
         var masterDataService;
         var scope;
+        var cardViewCtrlScope;
+        var cardViewCtrl;
         //setup
         beforeEach(module('customerpageApp'));
         //angular - mocks creation
-        beforeEach(inject(function ($rootScope,GetJSONDataService,MasterData,_$http_, _$httpBackend_) {
+        beforeEach(inject(function ($rootScope,GetJSONDataService,MasterData,_$http_, _$httpBackend_,$controller) {
             service = GetJSONDataService;
             masterDataService = MasterData;
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             scope = $rootScope;
+            cardViewCtrlScope = $rootScope.$new();
+            cardViewCtrl = $controller('cardVieController', {
+                $scope: cardViewCtrlScope
+
+            });
+
         }));
         beforeEach(function () {
             $httpBackend.
@@ -72,6 +86,56 @@
 
 
         });
+
+        it('testing cardViewController initialization',function(){
+
+            service.getCustomerRecords(function(data){
+                var customerData = data.records;
+                masterDataService.cardLayoutData = customerData;
+                expect(cardViewCtrlScope.names.length).toBe(masterDataService.cardLayoutData.length);
+
+            });
+
+
+
+
+            $httpBackend.flush();
+
+
+
+        });
+
+
+        it('testing rootscope initial values',function(){
+
+           expect(scope.show).toBe(true);
+            $httpBackend.flush();
+        });
+
+        it('testing delete function fo cardView Controller',function(){
+            service.getCustomerRecords(function(data){
+                var customerData = data.records;
+                masterDataService.cardLayoutData = customerData;
+                cardViewCtrlScope.delete(0);
+                expect(cardViewCtrlScope.names.length).toBe(1);
+              //  expect(cardViewCtrlScope.names.length).toBe(masterDataService.cardLayoutData.length);
+
+            });
+
+            $httpBackend.flush();
+        });
+
+        it('testing carViewController page parmaters after add operation',function(){
+            masterDataService.operation ='ADD';
+            expect(cardViewCtrlScope.pageParameters.currentPage).toBe(0);
+            expect(masterDataService.operation==='');
+
+            $httpBackend.flush();
+        });
+
+
+
+
 
     });
 
