@@ -1,7 +1,7 @@
 
 (function () {'use strict';
 
-    describe('add customer controller Test', function () {
+    describe('edit customer controller Test', function () {
         //mock object
         var customers = {
             'records': [
