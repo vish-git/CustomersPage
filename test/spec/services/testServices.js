@@ -25,12 +25,14 @@
         var scope;
         var cardViewCtrlScope;
         var cardViewCtrl;
+        var paginationService;
         //setup
         beforeEach(module('customerpageApp'));
         //angular - mocks creation
-        beforeEach(inject(function ($rootScope,GetJSONDataService,MasterData,_$http_, _$httpBackend_,$controller) {
+        beforeEach(inject(function ($rootScope,GetJSONDataService,MasterData,_$http_, _$httpBackend_,$controller,PaginationService) {
             service = GetJSONDataService;
             masterDataService = MasterData;
+            paginationService = PaginationService;
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             scope = $rootScope;
@@ -45,6 +47,8 @@
             $httpBackend.
                 whenGET('/customers/').
                 respond(function () { return [200, customers]; });
+            $httpBackend.whenGET('views/cardView.html')
+                .respond(200);
         });
         //tearDown
         afterEach(function () {
@@ -68,7 +72,7 @@
         it('testing GetJSONDataService',function(){
             service.getCustomerRecords(function(data){
                 var customerData = data.records;
-                masterDataService.cardLayoutData = customerData;
+                masterDataService.layoutData = customerData;
                 expect(customerData[0].Name).toBe('Word Bell');
             });
             $httpBackend.flush();
@@ -77,22 +81,38 @@
         it('testing MasterDataService',function(){
             service.getCustomerRecords(function(data){
                 var customerData = data.records;
-                masterDataService.cardLayoutData = customerData;
-                expect(customerData[0].Name).toBe('Word Bell');
+                masterDataService.layoutData = customerData;
+                expect(masterDataService.layoutData[0].Name).toBe('Word Bell');
             });
             $httpBackend.flush();
 
-            expect(masterDataService.cardLayoutData[0].Name).toBe('Word Bell');
+            expect(masterDataService.layoutData[0].Name).toBe('Word Bell');
 
 
         });
+
+        it('testing Pagination Service',function(){
+            service.getCustomerRecords(function(data){
+                var customerData = data.records;
+                masterDataService.layoutData = customerData;
+                console.log(paginationService);
+               // expect(customerData[0].Name).toBe('Word Bell');
+            });
+            $httpBackend.flush();
+
+           // expect(masterDataService.cardLayoutData[0].Name).toBe('Word Bell');
+
+
+        });
+
+
 
         it('testing cardViewController initialization',function(){
 
             service.getCustomerRecords(function(data){
                 var customerData = data.records;
-                masterDataService.cardLayoutData = customerData;
-                expect(cardViewCtrlScope.names.length).toBe(masterDataService.cardLayoutData.length);
+                masterDataService.layoutData = customerData;
+                expect(cardViewCtrlScope.names.length).toBe(masterDataService.layoutData.length);
 
             });
 
@@ -115,9 +135,9 @@
         it('testing delete function fo cardView Controller',function(){
             service.getCustomerRecords(function(data){
                 var customerData = data.records;
-                masterDataService.cardLayoutData = customerData;
+                masterDataService.layoutData = customerData;
                 cardViewCtrlScope.delete(0);
-                expect(cardViewCtrlScope.names.length).toBe(1);
+                expect(masterDataService.layoutData.length).toBe(1);
               //  expect(cardViewCtrlScope.names.length).toBe(masterDataService.cardLayoutData.length);
 
             });
@@ -132,6 +152,13 @@
 
             $httpBackend.flush();
         });
+
+
+
+
+
+
+
 
 
 
