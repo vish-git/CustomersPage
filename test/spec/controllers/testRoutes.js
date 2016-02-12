@@ -1,3 +1,5 @@
+
+'use strict';
 describe('Testing Routes', function () {
 
     var $httpBackend;

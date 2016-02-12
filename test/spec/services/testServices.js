@@ -11,10 +11,10 @@
                     'image' :'/images/User.jpg'
                 },
                 {
-                    "Name": "Candy sharon",
-                    "Location": "Dellas,Texas",
-                    "orders": 9,
-                    "image" :"/images/User.jpg"
+                    'Name': 'Candy sharon',
+                    'Location': 'Dellas,Texas',
+                    'orders': 9,
+                    'image' :'/images/User.jpg'
                 }]};
 
         //local variables
