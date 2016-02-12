@@ -26,13 +26,15 @@
         var cardViewCtrlScope;
         var cardViewCtrl;
         var paginationService;
+        var getEditCustomerDataService;
         //setup
         beforeEach(module('customerpageApp'));
         //angular - mocks creation
-        beforeEach(inject(function ($rootScope,GetJSONDataService,MasterData,_$http_, _$httpBackend_,$controller,PaginationService) {
+        beforeEach(inject(function ($rootScope,GetJSONDataService,MasterData,_$http_, _$httpBackend_,$controller,PaginationService,GetEditCustomerDataService) {
             service = GetJSONDataService;
             masterDataService = MasterData;
             paginationService = PaginationService;
+            getEditCustomerDataService = GetEditCustomerDataService;
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             scope = $rootScope;
@@ -47,8 +49,10 @@
             $httpBackend.
                 whenGET('/customers/').
                 respond(function () { return [200, customers]; });
-            $httpBackend.whenGET('views/cardView.html')
-                .respond(200);
+            $httpBackend.when('GET', 'views/cardView.html').respond(200);
+            $httpBackend.when('GET', 'views/listView.html').respond(200);
+            $httpBackend.when('GET', 'views/addCustomer.html').respond(200);
+            $httpBackend.when('GET', 'views/EditCustomer.html').respond(200);
         });
         //tearDown
         afterEach(function () {
@@ -95,12 +99,9 @@
             service.getCustomerRecords(function(data){
                 var customerData = data.records;
                 masterDataService.layoutData = customerData;
-                console.log(paginationService);
-               // expect(customerData[0].Name).toBe('Word Bell');
             });
             $httpBackend.flush();
 
-           // expect(masterDataService.cardLayoutData[0].Name).toBe('Word Bell');
 
 
         });
@@ -149,6 +150,20 @@
             masterDataService.operation ='ADD';
             expect(cardViewCtrlScope.pageParameters.currentPage).toBe(0);
             expect(masterDataService.operation==='');
+
+            $httpBackend.flush();
+        });
+
+
+        it('testing card View Controller edit function',function(){
+            service.getCustomerRecords(function(data){
+                var customerData = data.records;
+                masterDataService.layoutData = customerData;
+                cardViewCtrlScope.doEdit(0);
+                expect(getEditCustomerDataService.EditCustomerData).toBe(cardViewCtrlScope.names[0]);
+                expect(getEditCustomerDataService.EditCustomerIndex).toBe(0);
+
+            });
 
             $httpBackend.flush();
         });
